@@ -13,8 +13,6 @@ def setup_mocks():
     ClientService.db = mock_db
     return mock_db, mock_repository
 
-# Test file: tests/services/test_client_service.py
-
 def test_get_all():
     mock_db, mock_repository = setup_mocks()
     mock_repository.find_all.return_value = ["client1", "client2"]
