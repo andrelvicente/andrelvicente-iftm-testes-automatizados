@@ -42,3 +42,9 @@ class ClientService:
         if not client:
             raise HTTPException(status_code=404, detail="Client not found")
         ClientRepository.delete(self.db, client)
+        
+    def find_by_cpf(self, cpf: str):
+        client = ClientRepository.find_by_cpf(self.db, cpf)
+        if not client:
+            raise HTTPException(status_code=404, detail="Client not found")
+        return client

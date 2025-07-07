@@ -72,3 +72,14 @@ def delete_client(id: int, db: Session = Depends(get_db)):
     if not ClientService(db).delete(id):
         raise HTTPException(status_code=404, detail=CLIENT_NOT_FOUND_MESSAGE)
     return CLIENT_DELETED_MESSAGE
+
+@router.get("/cpf/{cpf}", response_model=ClientOut)
+def find_client_by_cpf(cpf: str, db: Session = Depends(get_db)):
+    """
+    Retrieve a client by its CPF.
+    """
+    client = ClientService(db).find_by_cpf(cpf)
+    if not client:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return client
+
